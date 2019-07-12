@@ -3,18 +3,18 @@
 void show_error();
 %}
 
-m		"mother"
-f		"father"
-g		"grand"
-G 		"great"
-
 %%
 
-{m} 				{printf("Mother\n");}
-{f}					{printf("Father\n");}
-{g}({m}|{f})+		{printf("Grand\n");}
-({G})+{g}({m}|{f})+	{printf("Great\n");}
-.					{show_error();}
+"mother"		{printf("mutter\n");}
+"father"		{printf("vater\n");}
+"grand"			{printf("gross\n");}
+"great"			{printf("ur\n");}
+"The"			{printf("Die\n");}
+"of"			{printf("von\n");}
+"Mary"			{printf("Maria\n");}
+"John"			{printf("Johan\n");}
+[ \t]       	{};       
+.				{show_error();}
 %%
 void show_error()
 {
