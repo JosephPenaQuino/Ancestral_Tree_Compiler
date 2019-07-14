@@ -2,38 +2,32 @@
 	#include <stdio.h>
 	int yylex();
 	int yyerror(char *s);
+
 %}
 
-%token MOTHER FATHER GRAND GREAT THE OF MARY JOHN OTHER
-
-%type <name> MOTHER
-%type <name> FATHER
-%type <name> GREAT
-%type <name> GRAND
-%type <name> THE
-%type <name> OF
-%type <name> MARY
-%type <name> JOHN
-%type <name> OTHER
+%token MOTHER FATHER GRAND GREAT ART PREP NAME EOL OTHER
 
 %%
 
 prog:
-	stmc | stms
+	| prog stms EOL 			{}
 	;
 
 stms:
-	parent
-	| 
+	parent						{$$ = $1;}
+	| GRAND parent				
+	| GREAT again GRAND parent	
+	;
+	
+again:
+	| GREAT again				
 	;
 
-stms
-	;
-
-name:
-	JOHN | MARY {$$=$1};
 parent:
-	MOTHER | FATHER {$$=$1};
+	MOTHER 						{$$ = $1;}
+	| FATHER 					{$$ = $1;}
+	;
+
 %%
 
 int yyerror(char *s)

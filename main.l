@@ -1,18 +1,19 @@
 %{
 #include <stdio.h>
-#include "test.tab.h"
+#include "main.tab.h"
 void show_error();
 %}
 
 %%
-"mother"		{return (MOTHER);}
-"father"		{return (FATHER);}
-"grand"			{return (GRAND);}
-"great"			{return (GREAT);}
-"The"			{return (THE);}
-"of"			{return (OF);}
-"Mary"			{return (MARY);}
-"John"			{return (JOHN);}
+"mother"		{return MOTHER;}
+"father"		{return FATHER;}
+"grand"			{return GRAND;}
+"great"			{return GREAT;}
+"The"			{return ART;}
+"of"			{return PREP;}
+"Mary"			{return NAME;}
+"John"			{return NAME;}
+\n 				{return EOL;}
 [ \t]       	{};       
 .				{show_error(); return (OTHER);}
 %%

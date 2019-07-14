@@ -1,15 +1,7 @@
-all: bison flex
-	@gcc -c y.tab.c lex.yy.c
-	@gcc y.tab.o lex.yy.o main.c -o main
-
-flex:
+all: main.l main.y
+	@bison -d main.y
 	@flex main.l
-
-bison:
-	@bison -y -d main.y
-
-lexical: flex
-	@gcc lex.yy.c -o main
+	@cc -o main main.tab.c lex.yy.c -lfl
 
 clean:
-	@rm lex.yy.c main y.tab.c y.tab.h
+	@rm lex.yy.c main.tab.c main.tab.h
