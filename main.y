@@ -8,7 +8,11 @@ node * calculate();
 node * mo();
 node * fa();
 node * g(node *nptr);
-
+node * G(node *nptr, parent_type pt);
+node * jo();
+node * ma();
+parent_type get_pt(node *nptr);
+void print_resultG(node * nptr);
 %}
 
 %union
@@ -16,25 +20,32 @@ node * g(node *nptr);
 	node * node_ptr;
 };
 
-%token MOTHER FATHER GRAND GREAT ART PREP NAME EOL OTHER
+%token MOTHER FATHER GRAND GREAT ART PREP EOL OTHER JOHN MARY
 
-%type <node_ptr> stmc stms parent again
+%type <node_ptr> stmc stms parent again againc name
 
 %%
 program:
         function                	{ exit(0); }
         ;
 function:
-	| function stms EOL 			{print_result($2);}
-	| function stmc EOL				{print_result($2);}
+	| function stms EOL 			{print_result($2); printf("\n");}
+	| function stmc EOL				{print_resultG($2);}
 	;
 
 stmc:
-	ART parent PREP againc NAME		{$$ = calculate();}
+	ART parent PREP name 			{$$ = G($4, get_pt($2));}
+	| ART parent PREP againc		{$$ = G($4, get_pt($2));}
 	;
 
 againc:
-	| ART parent PREP againc 		{}
+	ART parent PREP name 			{$$ = G($4, get_pt($2));}
+	| ART parent PREP againc 		{$$ = G($4, get_pt($2));}
+	;
+
+name:
+	JOHN							{$$ = jo();}
+	| MARY							{$$ = ma();}
 	;
 
 stms:

@@ -13,8 +13,8 @@ void show_error();
 "The"			{return ART;}
 "the"			{return ART;}
 "of"			{return PREP;}
-"Mary"			{return NAME;}
-"John"			{return NAME;}
+"Mary"			{return MARY;}
+"John"			{return JOHN;}
 \n 				{return EOL;}
 [ \t]       	{};       
 .				{show_error(); return (OTHER);}

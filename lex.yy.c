@@ -782,12 +782,12 @@ YY_RULE_SETUP
 case 8:
 YY_RULE_SETUP
 #line 16 "main.l"
-{return NAME;}
+{return MARY;}
 	YY_BREAK
 case 9:
 YY_RULE_SETUP
 #line 17 "main.l"
-{return NAME;}
+{return JOHN;}
 	YY_BREAK
 case 10:
 /* rule 10 can match eol */

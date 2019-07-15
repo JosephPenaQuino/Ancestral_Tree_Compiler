@@ -51,9 +51,10 @@ extern int yydebug;
     GREAT = 261,
     ART = 262,
     PREP = 263,
-    NAME = 264,
-    EOL = 265,
-    OTHER = 266
+    EOL = 264,
+    OTHER = 265,
+    JOHN = 266,
+    MARY = 267
   };
 #endif
 
@@ -62,11 +63,11 @@ extern int yydebug;
 
 union YYSTYPE
 {
-#line 15 "main.y" /* yacc.c:1909  */
+#line 19 "main.y" /* yacc.c:1909  */
 
 	node * node_ptr;
 
-#line 70 "main.tab.h" /* yacc.c:1909  */
+#line 71 "main.tab.h" /* yacc.c:1909  */
 };
 
 typedef union YYSTYPE YYSTYPE;
