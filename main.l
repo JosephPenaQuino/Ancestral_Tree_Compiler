@@ -1,5 +1,6 @@
 %{
 #include <stdio.h>
+#include "main.h"
 #include "main.tab.h"
 void show_error();
 %}
@@ -10,6 +11,7 @@ void show_error();
 "grand"			{return GRAND;}
 "great"			{return GREAT;}
 "The"			{return ART;}
+"the"			{return ART;}
 "of"			{return PREP;}
 "Mary"			{return NAME;}
 "John"			{return NAME;}

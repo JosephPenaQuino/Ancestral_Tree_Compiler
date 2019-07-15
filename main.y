@@ -1,40 +1,59 @@
 %{
-	#include <stdio.h>
-	int yylex();
-	int yyerror(char *s);
+#include "main.h"
+
+int yylex();
+int yyerror(char *s);
+void print_result(node * nptr);
+node * calculate();
+node * mo();
+node * fa();
+node * g(node *nptr);
 
 %}
 
+%union
+{
+	node * node_ptr;
+};
+
 %token MOTHER FATHER GRAND GREAT ART PREP NAME EOL OTHER
 
-%%
+%type <node_ptr> stmc stms parent again
 
-prog:
-	| prog stms EOL 			{}
+%%
+program:
+        function                	{ exit(0); }
+        ;
+function:
+	| function stms EOL 			{print_result($2);}
+	| function stmc EOL				{print_result($2);}
+	;
+
+stmc:
+	ART parent PREP againc NAME		{$$ = calculate();}
+	;
+
+againc:
+	| ART parent PREP againc 		{}
 	;
 
 stms:
-	parent						{$$ = $1;}
-	| GRAND parent				
-	| GREAT again GRAND parent	
+	parent							{$$ = $1;}
+	| GRAND parent					{$$ = g($2);}
+	| GREAT again 					{$$ = g($2);}
 	;
 	
 again:
-	| GREAT again				
+	GREAT again						{$$ = g($2);}
+	| GRAND parent					{$$ = g($2);}
 	;
 
 parent:
-	MOTHER 						{$$ = $1;}
-	| FATHER 					{$$ = $1;}
+	MOTHER 							{$$ = mo();}
+	| FATHER 						{$$ = fa();}
 	;
 
 %%
-
-int yyerror(char *s)
-{
-	printf("Syntax Error on line %s\n", s);
-	return 0;
-}
 
 int main()
 {
